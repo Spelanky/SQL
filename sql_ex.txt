@@ -51,3 +51,42 @@ AND laptop.hd >= 10
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7) Найдите номера моделей и цены всех имеющихся в продаже продуктов (любого типа) производителя B (латинская буква).
+
+Вариант 1:
+SELECT A.model, A.price FROM (SELECT model, price FROM pc
+UNION
+SELECT model, price FROM laptop
+UNION
+SELECT model, price FROM printer) 
+AS A INNER JOIN product ON product.model=A.model
+WHERE maker='B'
+
+Вариант 2:
+SELECT pc.model, pc.price FROM pc 
+JOIN product ON product.model = pc.model
+WHERE product.maker = 'B'
+UNION
+SELECT laptop.model, laptop.price FROM laptop 
+JOIN product ON product.model = laptop.model
+WHERE product.maker = 'B'
+UNION
+SELECT printer.model, printer.price FROM printer
+JOIN product ON product.model = printer.model
+WHERE product.maker = 'B'
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8) Найдите производителя, выпускающего ПК, но не ПК-блокноты.
+
+SELECT maker FROM product 
+WHERE type = 'pc'
+EXCEPT
+SELECT maker FROM product 
+WHERE type = 'laptop
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+9)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
